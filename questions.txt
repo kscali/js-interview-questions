@@ -1,0 +1,203 @@
+What is coercion in JavaScript? 
+ 
+  JavaScript has two types of coercian. Implicit and explicit. 
+  Implicit coercion is when JavaScript tries to coerce one data 
+  type to another such as when doing numerical calculations. 
+  ex: const sum = "1" + 1 => "11"; It will coerce 1 into a string and concatenate;
+
+  Explicit coercion is when we force a datatype change by explicitly calling a function to 
+  coerce the change. 
+  ex: String(1) => "1" or Number("10") => 10;
+
+What is Scope in JavaScript?
+
+  Scope describes the way functions have access to variables. Each function has it's own scope and functions 
+  have access to variables within it's scope as well as variables within the global scope. Only code withing the 
+  function can access that functions scoped variables. 
+
+Explain equality in JavaScript.
+  
+  JavaScript has two types of equality checks. == is loose equality check and checks for equality with coercion. 
+  === is a strict equality check. It makes sure the value and data type are equal.
+
+Explain what a callback function is and give an example.
+
+  A callback function is a function that is passed into another function as an argument. 
+  The function is then called after some code has been executed. 
+
+  ex: function hello() {console.log("hello")};
+      function sayHello (callback) {callback()};
+
+      sayHello(hello);
+
+What does "use strict" do? 
+  
+  Prevents accidentally creating global variables by throwing an error if global variables 
+  are created by mistake. "Use strict" is usually placed at the top of a file but can also be placed and the top of the function scope.
+
+Explain null and undefined. 
+  
+  Null is the absence of a value. Undefined is what is returned when a variable has been declared 
+  but it has not yet been assigned a value.
+
+Write a function that would allow you to do this? 
+
+  var addSix = createBase(6);
+  addSix(10); // returns 16
+  addSix(21); // returns 27
+
+  ex: function createBase(base) {
+    return function (num) {
+      return num + base;
+    }
+  }
+
+What are the types in JavaScript.
+
+  JavaScript has the following types:
+    -number 
+    -string 
+    -object
+    -boolean
+    -null 
+    -undefined 
+    -symbol
+
+Explain event bubbling and how one might prevent it. 
+  Event bubbling is when an event is triggered and it travels up the parent chain 
+  up to the document. Triggering an event on a child causes handlers on parent elements to be triggered.
+
+  You can prevent event bubbling by calling event.stopPropagation();
+
+
+What is let keyword in JavaScript? 
+
+  The let keyword is new to ES6. It replaces the var keyword for variables who's values can be reassigned. 
+  it is block scoped and can be used within a block and functions scope.
+
+How would you check if a number is an integer (no decimal values)? 
+
+  Use modulus operator to check if value is equal to 0 when using modulus with 1. If no decimals then a number is an integer. 
+  ex: function isInteger(number) {
+    return number % 1 === 0
+  }
+
+What is an IIFE? (Immediately Invoked Function)
+
+  An iife is an anonymous function that is created and immediatley executed after it's created. 
+  It is used for encapuslation and to prevent polluting global namespace because all the variables 
+  used inside the iife are not available outside it's scope. 
+
+What are some new features of ES6? 
+  1. arrow functions.
+  2. spread operator 
+  3. Class syntax 
+  4. string literal templates
+  5. const and let keywords
+  6. default parameter values 
+  7. "for of" for looping keys in Objects. 
+  8. Promises 
+  9. Module import/export using "import" and "export (default)" keywords instead of "require".
+
+What is the difference between "undefined" and "not defined"?
+
+  "Undefined" is what is returned when a variable has been declared but not defined and has no assigned value; 
+  "Not defined" is what is returned when a variable has not been declared. 
+
+What is the difference between anonymous and named functions? 
+
+  Named functions are functions that have been declared with the function keyword and a name and can be executed by calling the name. 
+  ex: function hello () {console.log("hello")};
+
+  Anonymous functions are functions with no names. They are often used in iifes, callbacks, and function expressions.
+
+What is a closure in JavaScript? 
+
+  A closure is a function inside another function that has access to the outer functions variables. The inner function 
+  closes over those variables and the inner function is returned. The inner function is called at a later time and has acces to the variables even after the outer 
+  function has returned. 
+
+  ex: function add() {
+    let total = 0;
+    return function(n) {
+      return total + n;
+    }
+  } 
+
+  let sum = add();
+  sum(5) // 5
+  sum(15) // 12
+
+What does a transpiler do? 
+  
+  A transpiler converts new code syntax into older code syntax. 
+  Babel is an example: ES^+ to ES5.
+
+How does the "this" keyword work? Give some examples. 
+
+  If a function is called function style, this refers to the window or global object. 
+  ex: hello(); => window
+
+  If a function is called method style, this refers to the receiver of the method. 
+  ex: rabbit.eat() => rabbit;
+
+  if a function is called constructor style, this refers to the newly created object. 
+  ex: const rabbit = new Rabbit ();  => rabbit;
+
+How would you add your own method to the Array object so the following code would work? 
+
+  var arr = [1, 2, 3, 4, 5];
+  var avg = arr.average();
+  console.log(avg);
+
+  ex: Array.prototype.average = function () {
+    let sum = 0;
+    for (let i = 0; i < this.length; i++) {
+      sum += this[i];
+    }
+
+    return sum/this.length; 
+  }
+
+What is hoisting in JavaScript? 
+
+  Hoisting is default behavior of JavaSript. Functions and variables declared with var keyword are hoisted to the top of the current scope.
+
+What will the following code output?
+
+  0.1 + 0.2 === 0.3 => false;
+
+  Output is false because of floating point errors. 0.1 + 0.2 does not equal 0.3 but 0.300000000004. 
+  Can fix by rounding results.
+
+Describe the Revealing Module Pattern design Pattern.
+
+  The Revealing Module Pattern maintains encapsulation and reveals certain variables and methods returned in an object.
+
+  ex: const Exposer = (function() {
+
+    let privateVariable = 10; 
+
+    const privateMethod = function() {
+      console.log('Inside a private method!');
+      privateVariable++;
+    };
+
+    const methodToExpose = function() {
+      console.log("This is the method I want exposed!");
+    }
+
+    const otherMethod = function () {
+      privateMethod();
+    }
+
+    return {
+      first: methodToExpose,
+      second: otherMethod
+    }
+  })();
+
+  Exposer.first() => This is the method I want exposed!
+  Exposer.second() => Inside a private method!
+
+
